@@ -30,7 +30,7 @@ CentOS Linux release 7.2.1511 (Core)
 
 Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フォルダ内のファイルがインストール後に配置される場所を表している。
 
-- chinachu-mirakurun-ss/
+- main/
   - cron/ [/etc/cron.d]
     - chinachu-mirakurun-ss-cron (スリープ移行確認ジョブ用 cron。)
   - etc/ [/usr/local/etc/chinachu-mirakurun-ss]
@@ -71,7 +71,7 @@ pm-utils のインストール (必要であれば)
 
 移動。
 
-    # cd chinachu-mirakurun-ss/chinachu-mirakurun-ss/
+    # cd chinachu-mirakurun-ss/main/
 
 設定ファイルを弄る。 (詳細は中身を参照。Chinachu と Mirakurun のホスト名とポート番号は少なくとも編集が必要かと。)
 
