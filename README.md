@@ -3,13 +3,13 @@
 ## Overview
 
 Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
-「Chinachu Sleep Scripts (β)」の改良 (劣化？) 版。
-作成途中なので、テストはあまりしていない (できていない)。動かないかもしれない。 (作者的には、フィードバックが欲しい。)
+
+「Chinachu Sleep Scripts (β)」の改良 (劣化？) 版。作成途中なので、テストはあまりしていない (できていない)。動かないかもしれない。 (作者的には、フィードバックが欲しい。)
 
 
 ## Description
 
-「Chinachu Sleep Scripts (β)」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直し、Mirakurun 対応部分を加えた。API を叩くスクリプトをすべてシェルスクリプトで書き直したため、Python 3 は不要となった。
+「Chinachu Sleep Scripts (β)」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直し、Mirakurun 対応部分を加えた。API を叩くスクリプトをすべてシェルスクリプトで書き直したため、Python 3 は不要となった。 (※ curl で API 経由の情報取得を行っている。)
 
 そんなこんなで色々とコード的に変更点が多いので、「Chinachu Sleep Scripts (β)」とは別リポジトリとした。
 
@@ -22,6 +22,9 @@ Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 $ cat /etc/centos-release
 CentOS Linux release 7.2.1511 (Core)
 ```
+
+CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その派生の Ubuntu とかでも動かせないことはないはず。
+
 
 ## Components
 
@@ -52,10 +55,11 @@ Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フ�
 
 ## Usage
 
-pm-utils のインストール (必要であれば)
+pm-utils のインストール (必要であれば)。
 
 ```
-# yum install pm-utils
+# yum install pm-utils        # for RHEL / CentOS users
+# apt-get install pm-utils    # for Debian / Ubuntu users
 ```
 
 作業フォルダに移動。
@@ -91,7 +95,7 @@ pm-utils のインストール (必要であれば)
 
 で、おしまい。
 
-設定を変えたいときは、/usr/local/etc/chinachu-mirakurun-ss/config を弄る。
+設定を変えたいときは、/usr/local/etc/chinachu-mirakurun-ss/config を弄る。それだけで OK。
 
 
 ## License
