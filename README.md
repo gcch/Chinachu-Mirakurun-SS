@@ -1,6 +1,7 @@
 # Chinachu with Mirakurun Sleep Scripts (β)
 
 ## Overview
+
 Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 「Chinachu Sleep Scripts (β)」の改良 (劣化？) 版。
 作成途中なので、テストはあまりしていない (できていない)。動かないかもしれない。 (作者的には、フィードバックが欲しい。)
@@ -10,14 +11,18 @@ Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
 「Chinachu Sleep Scripts (β)」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直し、Mirakurun 対応部分を加えた。API を叩くスクリプトをすべてシェルスクリプトで書き直したため、Python 3 は不要となった。
 
+そんなこんなで色々とコード的に変更点が多いので、「Chinachu Sleep Scripts (β)」とは別リポジトリとした。
+
 
 ## Test environment
 
 * FUJITSU Server PRIMERGY TX1310 M1 (Pentium G3420, 4 GB RAM) + Earthsoft PT3 Rev.A
 
-    $ cat /etc/centos-release
-    CentOS Linux release 7.2.1511 (Core)
 
+```
+$ cat /etc/centos-release
+CentOS Linux release 7.2.1511 (Core)
+```
 
 ## Components
 
