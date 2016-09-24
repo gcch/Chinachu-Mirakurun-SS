@@ -18,15 +18,12 @@ Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
 * FUJITSU Server PRIMERGY TX1310 M1 (Pentium G3420, 4 GB RAM) + Earthsoft PT3 Rev.A
 
-
 ```
 $ cat /etc/centos-release
 CentOS Linux release 7.2.1511 (Core)
 ```
 
 ## Components
-
-### Component files
 
 Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フォルダ内のファイルがインストール後に配置される場所を表している。
 
@@ -52,37 +49,48 @@ Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フ�
 - README.md (このファイル。)
 - LICENSE.md (ライセンスファイル。)
 
-### About settings
-インストール前であれば chinachu-mirakurun-ss/etc/config ファイルを、インストール後は /usr/local/etc/chinachu-mirakurun-ss/config を参照
 
 ## Usage
 
 pm-utils のインストール (必要であれば)
 
-    # yum install pm-utils
+```
+# yum install pm-utils
+```
 
 作業フォルダに移動。
 
-    # cd /usr/local/src
+```
+# cd /usr/local/src
+```
 
 クローン。
 
-    # git clone --depth 1 https://github.com/gcch/Chinachu-Mirakurun-SS.git ./chinachu-mirakurun-ss
+```
+# git clone --depth 1 https://github.com/gcch/Chinachu-Mirakurun-SS.git ./chinachu-mirakurun-ss
+```
 
 移動。
 
-    # cd chinachu-mirakurun-ss/main/
+```
+# cd chinachu-mirakurun-ss/main/
+```
 
 設定ファイルを弄る。 (詳細は中身を参照。Chinachu と Mirakurun のホスト名とポート番号は少なくとも編集が必要かと。)
 
-    # vi etc/config
+```
+# vi etc/config
+```
 
 インストールを開始する。
 
-    # chmod +x install.sh
-    # ./install.sh
+```
+# chmod +x install.sh
+# ./install.sh
+```
 
 で、おしまい。
+
 設定を変えたいときは、/usr/local/etc/chinachu-mirakurun-ss/config を弄る。
 
 
