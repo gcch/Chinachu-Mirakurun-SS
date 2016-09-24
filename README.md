@@ -36,7 +36,7 @@ Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フ�
     - chinachu-api-count-connection (Chinachu WUI 接続中のユーザ数をカウントするスクリプト。)
     - chinachu-api-get-top-reserve-time (近々の録画予約開始時間出力スクリプト。)
     - chinachu-api-is-recording (Chinachu の録画状況取得スクリプト。)
-    - chinachu-mirakurun-check-status (スリープ移行可能状況確認スクリプト。確認項目を増やしたい場合には、ココを編集。)
+    - chinachu-mirakurun-check-status (スリープ移行可能状況確認スクリプト。確認項目を増やしたい場合には、ココを編集。cron のジョブで参照。)
     - chinachu-mirakurun-sleep (電源管理マネージャ用のスクリプト。起動および停止移行時に実行される。次回起動タイマー設定が主な目的。)
     - mirakurun-api-sum-stream-count (Mirakurun がストリーム処理中かを確認するスクリプト。)
     - shift-to-sleep (電源管理マネージャに合わせた、休止 or シャットダウンコマンド実行スクリプト。cron のジョブで参照。)
