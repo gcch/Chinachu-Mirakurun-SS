@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ------------------------------------------------------- #
+#
+# chinachu-api-count-connection
+# (Component of Chinachu with Mirakurun Sleep Script)
+#
+# Copyright (c) 2016 tag
+#
+# ------------------------------------------------------- #
+
+# default values
+DefaultChinachuHost="localhost"
+DefaultChinachuPort="10772"
+
+# funciton: Usage
+function Usage() {
+	echo "Usage: $0 [-h <host>] [-p <port>]"
+	echo -e "host\tChinachu server's hostname (Defalut: ${DefaultChinachuHost})"
+	echo -e "port\tChinachu server's port number (Defalut: ${DefaultChinachuPort})"
+}
+
+# analize options
+while getopts :h:p: Opt
+do
+	case $Opt in
+	h)
+		ChinachuHost=$OPTARG
+		;;
+	p)
+		ChinachuPort=$OPTARG
+		;;
+	\?)
+		echo "Illegal option: $OPTARG"
+		Usage
+		exit 1
+		;;
+	esac
+done
+
+# set variables
+ChinachuHost=${ChinachuHost:-${DefaultChinachuHost}}
+ChinachuPort=${ChinachuPort:-${DefaultChinachuPort}}
+ChinachuUrl="http://${ChinachuHost}:${ChinachuPort}"
+
+ApiPath="/api/status.json"
+Attr="connectedCount"
+
+# get connected count
+Count=`curl -s ${ChinachuUrl}${ApiPath} | tr -d "\n" | tr -d " " | sed "s/^.*\"${Attr}\":\([0-9]*\).*$/\1/"`
+
+exit ${Count}

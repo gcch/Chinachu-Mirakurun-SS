@@ -1,0 +1,12 @@
+# ------------------------------------------------------- #
+#
+# chinachu-mirakurun-ss-cron
+# (Component of Chinachu with Mirakurun Sleep Script)
+#
+# Copyright (c) 2016 tag
+#
+# ------------------------------------------------------- #
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=
+HOME=/

@@ -1,0 +1,209 @@
+#!/bin/bash
+
+# ------------------------------------------------------- #
+#
+# chinachu-mirakurun-sleep
+# (Component of Chinachu with Mirakurun Sleep Script)
+#
+# Copyright (c) 2016 tag
+#
+# ------------------------------------------------------- #
+
+# ======================================================= #
+
+# Include Chinachu Sleep Script configuration file
+source /usr/local/etc/chinachu-mirakurun-ss/config
+
+# environment
+PATH=${PATH}:/usr/bin:/usr/sbin
+WakeAlarm="/sys/class/rtc/rtc0/wakealarm"
+
+# ======================================================= #
+
+function GetNextScheduleTime() {
+	# check the number of arguments
+	if [ $# -le 0 ]
+	then
+		echo "usage: $0 <time1> (<time2> ...)" 1>&2
+		exit 1
+	fi
+
+	# check and get arguments
+	declare Schedule=""
+	while [ "$1" != "" ]
+	do
+		Schedule="${Schedule} `echo $1 | grep -e "^[0-1]\{0,1\}[0-9]:[0-5]\{0,1\}[0-9]$" -e "^2[0-3]:[0-5]\{0,1\}[0-9]$"`"
+		shift
+	done
+	Schedule=( ${Schedule} )
+	#echo "schedule: ${Schedule[*]}" 1>&2
+
+	# now: set current date
+	declare -i Now=`date +%s`
+	#echo "now: ${Now} (`date -d @${Now}`)" 1>&2
+
+	# wakeup time: set max value (tomorrow)
+	declare -i WakeupTime=`date -d +1day +%s`
+
+	# candidate time to wake up: set 0
+	declare -i CandidateTime=0
+
+	# found candidate time flag
+	declare -i Flg=1
+
+	# check during today
+	for Date in ${Schedule[*]}
+	do
+		CandidateTime=`date -d ${Date} +%s`
+		#echo "candidate: ${CandidateTime} (`date -d @${CandidateTime}`)" 1>&2
+		if (( CandidateTime > Now && CandidateTime < WakeupTime ))
+		then
+			#echo "found" 1>&2
+			WakeupTime=${CandidateTime}
+			Flg=0
+		fi
+	done
+
+	# found next boot time
+	if (( Flg == 0 ))
+	then
+		echo ${WakeupTime}
+		exit 0
+	fi
+
+	# check during tomorrow
+	for Date in ${Schedule[*]}
+	do
+		CandidateTime=`date -d ${Date} +%s`
+		(( CandidateTime = CandidateTime + 86400 ))	# 86400 sec. = 1 day
+		#echo "candidate: ${CandidateTime} (`date -d @${CandidateTime}`)" 1>&2
+		if (( CandidateTime > Now && CandidateTime < WakeupTime ))
+		then
+			#echo "found" 1>&2
+			WakeupTime=${CandidateTime}
+			Flg=0
+		fi
+	done
+
+	echo ${WakeupTime}
+	exit ${Flg}
+}
+
+# ------------------------------------------------------- #
+
+function GetTopReserveTime() {
+	ChinachuUrl="http://${ChinachuHost}:${ChinachuPort}"
+
+	ApiPath="/api/reserves.json"
+
+	declare -i RecTime
+
+	# get the next recording begin time
+	(( RecTime = `curl -s ${ChinachuUrl}${ApiPath} | tr ',' '\n' | grep "start" | cut -d ":" -f 2 | sort | head -n 1` / 1000 ))
+
+	echo ${RecTime}
+}
+
+# ------------------------------------------------------- #
+
+function PrepareToSleep() {
+	# get the start time of the next reserved program
+	NextRecordStartTime=`GetTopReserveTime`
+	if [ -n "${NextRecordStartTime}" ]
+	then
+		echo "NextRecordStartTime: `date -d @${NextRecordStartTime}` (${NextRecordStartTime})" 1>&2
+	else 
+		echo "NextRecordStartTime: empty" 1>&2
+	fi
+
+	# get the time of the periodic epg update
+	NextScheduleTime=`GetNextScheduleTime ${WakeupSchedule}`
+	if [ -n "${NextScheduleTime}" ]
+	then
+		echo "NextScheduleTime: `date -d @${NextScheduleTime}` (${NextScheduleTime})" 1>&2
+	else
+		echo "NextScheduleTime: empty" 1>&2
+	fi
+
+	if [ -z "${NextRecordStartTime}" ] && [ -z "${NextScheduleTime}" ]
+	then
+		echo "This system will be stop without scheduling next wakeup"
+		echo 0 > ${WakeAlarm}
+		exit 0
+	fi
+
+	if [ -n "${NextRecordStartTime}" ]
+	then
+		if (( ${NextRecordStartTime} < ${NextScheduleTime} ))
+		then
+			(( WakeupTime = NextRecordStartTime - WakeupMarginBeforeRecord ))
+		else
+			(( WakeupTime = NextScheduleTime - WakeupMarginBeforeRecord ))
+		fi
+	else
+		(( WakeupTime = NextScheduleTime - WakeupMarginBeforeRecord ))
+	fi
+
+	echo "try to set an wakeup alarm (${WakeupTime})" 1>&2
+	echo 0 > ${WakeAlarm}
+	if `echo ${WakeupTime} > ${WakeAlarm}`
+	then
+		echo "[`date`] ${0}: set the next wake up time at `date -d @${WakeupTime}`" 1>&2
+	else
+		echo "[`date`] ${0}: failure to schedule" 1>&2
+	fi
+
+	# unload an kernel module (pt3_drv)
+	if lsmod | grep pt3_drv > /dev/null 2>&1
+	then
+		modprobe -r pt3_drv
+	fi
+
+	echo "This system will be stopped soon."
+}
+
+# ------------------------------------------------------- #
+
+function InitializeAfterWakeup() {
+	echo 0 > ${WakeAlarm}
+	touch ${TmpFile}
+
+	# load an kernel module (pt3_drv)
+	modprobe pt3_drv
+
+	echo "This system is waking up from hibernate or suspend now."
+}
+
+# ------------------------------------------------------- #
+
+# for pm-utils
+case ${1} in
+	hibernate|suspend)
+		PrepareToSleep
+	;;
+	thaw|resume)
+		InitializeAfterWakeup
+	;;
+esac
+
+# for systemd
+case ${1}/${2} in
+	pre/*)
+		PrepareToSleep
+	;;
+	post/*)
+		InitializeAfterWakeup
+	;;
+esac
+
+# for test
+case ${1} in
+	finalize)
+		PrepareToSleep
+	;;
+	initialize)
+		InitializeAfterWakeup
+	;;
+esac
+
+exit 0

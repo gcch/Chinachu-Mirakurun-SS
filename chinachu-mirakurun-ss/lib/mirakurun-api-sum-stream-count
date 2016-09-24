@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# ------------------------------------------------------- #
+#
+# mirakurun-api-sum-stream-count
+# (Component of Chinachu with Mirakurun Sleep Script)
+#
+# Copyright (c) 2016 tag
+#
+# ------------------------------------------------------- #
+
+# default values
+DefaultMirakurunHost="localhost"
+DefaultMirakurunPort="40772"
+
+# funciton: Usage
+function Usage() {
+	echo "Usage: $0 [-h <host>] [-p <port>]"
+	echo -e "host\tMirakurun server's hostname (Defalut: ${DefaultMirakurunHost})"
+	echo -e "port\tMirakurun server's port number (Defalut: ${DefaultMirakurunPort})"
+}
+
+# analize options
+while getopts :h:p: Opt
+do
+	case $Opt in
+	h)
+		MirakurunHost=$OPTARG
+		;;
+	p)
+		MirakurunPort=$OPTARG
+		;;
+	\?)
+		echo "Illegal option: $OPTARG"
+		Usage
+		exit 1
+		;;
+	esac
+done
+
+# set variables
+MirakurunHost=${MirakurunHost:-${DefaultMirakurunHost}}
+MirakurunPort=${MirakurunPort:-${DefaultMirakurunPort}}
+MirakurunUrl="http://${MirakurunHost}:${MirakurunPort}"
+
+ApiPath="/api/status"
+Attr="streamCount"
+
+# get stream count
+StreamCount=`curl -s ${MirakurunUrl}${ApiPath} | tr -d "\n" | tr -d " " | sed "s/^.*,\"${Attr}\":{\([^}]*\)}.*$/\1/"`
+
+# result status
+Status=0
+
+# check element's value of "streamCount"
+for Elem in `echo $StreamCount | tr "," " "`
+do
+	if (( `echo $Elem | cut -d ":" -f 2` != 0 ))
+	then
+		(( Status = Status + 1 ))
+	fi
+done
+
+exit $Status

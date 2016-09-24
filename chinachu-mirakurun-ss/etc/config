@@ -1,0 +1,52 @@
+# ------------------------------------------------------- #
+#
+# config
+# (Component of Chinachu with Mirakurun Sleep Script)
+#
+# Copyright (c) 2016 tag
+#
+# ------------------------------------------------------- #
+
+# ------------------------------------------------------- #
+
+# Chinachu Server (You can modify.)
+ChinachuHost="localhost"
+ChinachuPort="10772"
+
+# Mirakurun Server (You can modify.)
+MirakurunHost="localhost"
+MirakurunPort="40772"
+
+# Chinachu Sleep Behavior (You can modify.)
+CheckPeriod="15"
+CheckMarginAfterWakeup="900"
+WakeupMarginBeforeRecord="600"
+SleepThresholdBeforeNextRecord="3600"
+WakeupSchedule="05:00 17:00"	# separate with a space
+PowerManager="pm-utils"	# pm-utils / systemd
+PowerState="hibernate"	# hibernate / shutdown
+
+# ------------------------------------------------------- #
+
+# Chinachu with Mirakurun SS files (DO NOT CHANGE!)
+
+ProjectName="chinachu-mirakurun-ss"
+
+LibDir="/usr/local/lib/${ProjectName}"
+ChinachuApiCountConnection="${LibDir}/chinachu-api-count-connection"
+ChinachuApiGetTopReserveTime="${LibDir}/chinachu-api-get-top-reserve-time"
+ChinachuApiIsRecording="${LibDir}/chinachu-api-is-recording"
+MirakurunApiSumStreamCount="${LibDir}/mirakurun-api-sum-stream-count"
+ChinachuCheckStatus="${LibDir}/chinachu-mirakurun-check-status"
+PowerSleepScript="${LibDir}/chinachu-mirakurun-sleep"
+ShiftToSleep="${LibDir}/shift-to-sleep"
+
+CronDir="/etc/cron.d"
+CronScript="${ProjectName}-cron"
+
+PmUtilsScript="/etc/pm/sleep.d/81${ProjectName}"
+SystemdScript="/usr/lib/systemd/system-sleep/${ProjectName}"
+
+TmpFile="/var/tmp/.${ProjectName}"
+
+# ------------------------------------------------------- #
