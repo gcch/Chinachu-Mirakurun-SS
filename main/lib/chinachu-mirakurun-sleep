@@ -111,23 +111,23 @@ function PrepareToSleep() {
 	NextRecordStartTime=`GetTopReserveTime`
 	if [ -n "${NextRecordStartTime}" ]
 	then
-		echo "NextRecordStartTime: `date -d @${NextRecordStartTime}` (${NextRecordStartTime})" 1>&2
+		echo "[`date`] ${0}: NextRecordStartTime is `date -d @${NextRecordStartTime}` (${NextRecordStartTime})" 1>&2
 	else 
-		echo "NextRecordStartTime: empty" 1>&2
+		echo "[`date`] ${0}: NextRecordStartTime is empty" 1>&2
 	fi
 
 	# get the time of the periodic epg update
 	NextScheduleTime=`GetNextScheduleTime ${WakeupSchedule}`
 	if [ -n "${NextScheduleTime}" ]
 	then
-		echo "NextScheduleTime: `date -d @${NextScheduleTime}` (${NextScheduleTime})" 1>&2
+		echo "[`date`] ${0}: NextScheduleTime is `date -d @${NextScheduleTime}` (${NextScheduleTime})" 1>&2
 	else
-		echo "NextScheduleTime: empty" 1>&2
+		echo "[`date`] ${0}: NextScheduleTime is empty" 1>&2
 	fi
 
 	if [ -z "${NextRecordStartTime}" ] && [ -z "${NextScheduleTime}" ]
 	then
-		echo "This system will be stop without scheduling next wakeup"
+		echo "[`date`] ${0}: This system will be stop without scheduling next wakeup"
 		echo 0 > ${WakeAlarm}
 		exit 0
 	fi
@@ -144,7 +144,7 @@ function PrepareToSleep() {
 		(( WakeupTime = NextScheduleTime - WakeupMarginBeforeRecord ))
 	fi
 
-	echo "try to set an wakeup alarm (${WakeupTime})" 1>&2
+	echo "[`date`] ${0}: try to set an wakeup alarm (${WakeupTime})" 1>&2
 	echo 0 > ${WakeAlarm}
 	if `echo ${WakeupTime} > ${WakeAlarm}`
 	then
@@ -159,7 +159,7 @@ function PrepareToSleep() {
 		modprobe -r pt3_drv
 	fi
 
-	echo "This system will be stopped soon."
+	echo "[`date`] ${0}: This system will be stopped soon."
 }
 
 # ------------------------------------------------------- #
@@ -171,12 +171,12 @@ function InitializeAfterWakeup() {
 	# load an kernel module (pt3_drv)
 	modprobe pt3_drv
 
-	echo "This system is waking up from hibernate or suspend now."
+	echo "[`date`] ${0}: This system is waking up from hibernate or suspend now."
 }
 
-# ------------------------------------------------------- #
+# ======================================================= #
 
-# for pm-utils
+# main for pm-utils
 case ${1} in
 	hibernate|suspend)
 		PrepareToSleep
@@ -186,7 +186,9 @@ case ${1} in
 	;;
 esac
 
-# for systemd
+# ------------------------------------------------------- #
+
+# main for systemd
 case ${1}/${2} in
 	pre/*)
 		PrepareToSleep
@@ -196,7 +198,10 @@ case ${1}/${2} in
 	;;
 esac
 
-# for test
+# ======================================================= #
+
+# test
+
 case ${1} in
 	finalize)
 		PrepareToSleep

@@ -9,6 +9,9 @@
 
 # ------------------------------------------------------- #
 
+# Enable Chinachu with Mirakurun Sleep Script
+EnableSleep=0	# 0: true / 1: false
+
 # Chinachu Server (You can modify.)
 ChinachuHost="localhost"
 ChinachuPort="10772"
@@ -32,14 +35,15 @@ PowerState="hibernate"	# hibernate / shutdown
 
 ProjectName="chinachu-mirakurun-ss"
 
-LibDir="/usr/local/lib/${ProjectName}"
+Prefix="/usr/local"
+LibDir="${Prefix}/lib/${ProjectName}"
 ChinachuApiCountConnection="${LibDir}/chinachu-api-count-connection"
 ChinachuApiGetTopReserveTime="${LibDir}/chinachu-api-get-top-reserve-time"
 ChinachuApiIsRecording="${LibDir}/chinachu-api-is-recording"
 MirakurunApiSumStreamCount="${LibDir}/mirakurun-api-sum-stream-count"
-ChinachuCheckStatus="${LibDir}/chinachu-mirakurun-check-status"
+ChinachuCheckStatus="${LibDir}/chkstatus"
 PowerSleepScript="${LibDir}/chinachu-mirakurun-sleep"
-ShiftToSleep="${LibDir}/shift-to-sleep"
+ShiftToSleep="${LibDir}/sleepcmd"
 
 CronDir="/etc/cron.d"
 CronScript="${ProjectName}-cron"

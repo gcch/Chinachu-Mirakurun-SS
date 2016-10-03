@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# ------------------------------------------------------- #
+#
+# sleepcmd
+# (Component of Chinachu with Mirakurun Sleep Script)
+#
+# Copyright (c) 2016 tag
+#
+# ------------------------------------------------------- #
+
+# ======================================================= #
+
+# Include Chinachu Sleep Script configuration file
+source /usr/local/etc/chinachu-mirakurun-ss/config
+
+# ======================================================= #
+
+echo "PowerManager: ${PowerManager}"
+echo "PowerState: ${PowerState}"
+
+case ${PowerManager} in
+pm-utils)
+        case ${PowerState} in
+        hibernate)
+                /usr/sbin/pm-hibernate
+                ;;
+        shutdown)
+                /usr/sbin/shutdown -h now
+                ;;
+        *)
+                echo "error: please check \`PowerState' in config"
+                ;;
+        esac
+        ;;
+systemd)
+        case ${PowerState} in
+        hibernate)
+                /usr/bin/systemctl hibernate
+                ;;
+        shutdown)
+                /usr/bin/systemctl shutdown
+                ;;
+        *)
+                echo "error: please check \`PowerState' in config"
+                ;;
+        esac
+        ;;
+*)
+        echo "error: please check \`PowerManager' in config"
+        ;;
+esac
