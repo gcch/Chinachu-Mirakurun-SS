@@ -4,19 +4,23 @@
 
 Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
-「Chinachu Sleep Scripts (β)」の改良 (劣化？) 版。作成途中なので、ちゃんと動かない。 (作者的には、フィードバックが欲しい。)
+「Chinachu Sleep Scripts (β)」の改良 (劣化？) 版。
+
+ちゃんと動かない可能性あり。
 
 
 ## Description
 
-「Chinachu Sleep Scripts (β)」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直し、Mirakurun 対応部分を加えた。API を叩くスクリプトをすべてシェルスクリプトで書き直したため、Python 3 は不要となった。 (※ curl で API 経由の情報取得を行っている。)
+「[Chinachu Sleep Scripts (β)](https://github.com/gcch/Chinachu-Sleep-Scripts "GitHub - gcch/Chinachu-Sleep-Scripts")」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直し、Mirakurun チェック部分を加えた。
 
-そんなこんなで色々とコード的に変更点が多いので、「Chinachu Sleep Scripts (β)」とは別リポジトリとした。
+API を叩くスクリプトをすべてシェルスクリプトで書き直したため、Python 3 は不要となった。 (※ curl で API 経由の情報取得を行っている。)
+
+そんなこんなで色々とコード的に変更点が多いので、「[Chinachu Sleep Scripts (β)](https://github.com/gcch/Chinachu-Sleep-Scripts "GitHub - gcch/Chinachu-Sleep-Scripts")」とは別リポジトリとした。
 
 
 ## Test environment
 
-### System & Operating System
+### Hardware & operating system
 
 * FUJITSU Server PRIMERGY TX1310 M1 (Pentium G3420, 4 GB RAM) + Earthsoft PT3 Rev.A
 
@@ -31,8 +35,8 @@ CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その
 
 - Mirakurun with Rivarun on Chinachu Beta
  - [Chinachu Beta](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.")
- - [Rivarun](https://github.com/Chinachu/Rivarun "GitHub - Chinachu/Rivarun: A Simple Mirakurun Client Implementation like recpt1.") (1.2.0)
- - [Mirakurun](https://github.com/Chinachu/Mirakurun "GitHub - Chinachu/Mirakurun: A Modern DTV Tuner Server Service.") (2.0.0 beta 0)
+ - [Rivarun](https://github.com/Chinachu/Rivarun "GitHub - Chinachu/Rivarun: A Simple Mirakurun Client Implementation like recpt1.") (v1.2.0)
+ - [Mirakurun](https://github.com/Chinachu/Mirakurun "GitHub - Chinachu/Mirakurun: A Modern DTV Tuner Server Service.") (v2.0.0 beta 0)
 
 
 ## Components
@@ -64,7 +68,9 @@ Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フ�
 
 ## Usage
 
-pm-utils のインストール (必要であれば)。
+### Install
+
+pm-utils のインストール。systemd (RHEL / CentOS 7 以降) 環境であれば、正直不要。
 
 ```
 # yum install pm-utils        # for RHEL / CentOS users
@@ -89,7 +95,7 @@ pm-utils のインストール (必要であれば)。
 # cd chinachu-mirakurun-ss/main/
 ```
 
-インストールを開始する。
+インストールを開始する。エラーが出なければ問題なし。
 
 ```
 # chmod +x install.sh
@@ -101,6 +107,10 @@ pm-utils のインストール (必要であれば)。
 ```
 # vi /usr/local/etc/chinachu-mirakurun-ss/config
 ```
+
+これで準備完了。/etc/cron.d 配下に定期監視スクリプトが入っていること、/usr/local/lib/chinachu-mirakurun-ss 配下に状況チェック用のスクリプトが入っていれば問題ないはず。
+
+### Uninstall
 
 不要になったら、アンインストールスクリプトを叩けばOK。
 
