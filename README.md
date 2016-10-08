@@ -4,7 +4,7 @@
 
 Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
-「Chinachu Sleep Scripts (β)」の改良 (劣化？) 版。
+「[Chinachu Sleep Scripts (β)](https://github.com/gcch/Chinachu-Sleep-Scripts "GitHub - gcch/Chinachu-Sleep-Scripts")」の改良 (劣化？) 版。
 
 ちゃんと動かない可能性あり。
 
