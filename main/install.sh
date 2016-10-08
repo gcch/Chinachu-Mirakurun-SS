@@ -24,7 +24,10 @@ function CheckRunAsRoot() {
 function CreateAndImportConfig() {
 	echo "setup configuration:"
 
-	ConfigFile="/usr/local/etc/chinachu-mirakurun-ss/config"
+	Prefix="/usr/local"
+	ProjectName="chinachu-mirakurun-ss"
+	ConfigFile="${Prefix}/etc/${ProjectName}/config"
+	ComponentsListFile="${Prefix}/etc/${ProjectName}/components"
 
 	# check to exist the directory
 	if [ ! -d ${ConfigFile%/*} ]
@@ -42,6 +45,10 @@ function CreateAndImportConfig() {
 
 	# import the config file
 	source ${ConfigFile}
+
+	# copy and import the components list file
+	cp -f ./etc/components ${ComponentsListFile} 
+	source ${ComponentsListFile}
 
 	echo
 }
@@ -91,24 +98,21 @@ function LinkPowerManagerScript() {
 function SetupCron() {
 	echo "setup cron for sleep:"
 
-	# cron file
-	declare CronFile="${CronDir}/${ProjectName}"
-
 	# delete a cron file if it exists
-	if [ -f ${CronFile} ]
+	if [ -f ${CronScript} ]
 	then
 		echo "deleting an old cron file..."
-		rm -f ${CronFile}
+		rm -f ${CronScript}
 	fi
 
 	# copy a cron file
 	echo "creating an cron base file..."
-	cp ./cron/chinachu-mirakurun-ss-cron ${CronFile}
+	cp ./cron/chinachu-mirakurun-ss-cron ${CronScript}
 
 	# write a cron schedule
 	declare CronEntry="*/${CheckPeriod} * * * * root ${ChinachuCheckStatus} && sleep 10 && ${ShiftToSleep}"
 	echo "writing a cron job..."
-	echo "${CronEntry}" >> "${CronFile}"
+	echo "${CronEntry}" >> "${CronScript}"
 
 	echo
 }

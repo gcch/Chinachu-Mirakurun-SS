@@ -30,27 +30,3 @@ PowerManager="pm-utils"	# pm-utils / systemd
 PowerState="hibernate"	# hibernate / shutdown
 
 # ------------------------------------------------------- #
-
-# Chinachu with Mirakurun SS files (DO NOT CHANGE!)
-
-ProjectName="chinachu-mirakurun-ss"
-
-Prefix="/usr/local"
-LibDir="${Prefix}/lib/${ProjectName}"
-ChinachuApiCountConnection="${LibDir}/chinachu-api-count-connection"
-ChinachuApiGetTopReserveTime="${LibDir}/chinachu-api-get-top-reserve-time"
-ChinachuApiIsRecording="${LibDir}/chinachu-api-is-recording"
-MirakurunApiSumStreamCount="${LibDir}/mirakurun-api-sum-stream-count"
-ChinachuCheckStatus="${LibDir}/chkstatus"
-PowerSleepScript="${LibDir}/chinachu-mirakurun-sleep"
-ShiftToSleep="${LibDir}/sleepcmd"
-
-CronDir="/etc/cron.d"
-CronScript="${ProjectName}-cron"
-
-PmUtilsScript="/etc/pm/sleep.d/81${ProjectName}"
-SystemdScript="/usr/lib/systemd/system-sleep/${ProjectName}"
-
-TmpFile="/var/tmp/.${ProjectName}"
-
-# ------------------------------------------------------- #

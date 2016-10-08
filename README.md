@@ -16,6 +16,8 @@ Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
 ## Test environment
 
+### System & Operating System
+
 * FUJITSU Server PRIMERGY TX1310 M1 (Pentium G3420, 4 GB RAM) + Earthsoft PT3 Rev.A
 
 ```
@@ -24,6 +26,13 @@ CentOS Linux release 7.2.1511 (Core)
 ```
 
 CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その派生の Ubuntu とかでも動かせないことはないはず。
+
+### Software
+
+- Mirakurun with Rivarun on Chinachu Beta
+ - [Chinachu Beta](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.")
+ - [Rivarun](https://github.com/Chinachu/Rivarun "GitHub - Chinachu/Rivarun: A Simple Mirakurun Client Implementation like recpt1.") (1.2.0)
+ - [Mirakurun](https://github.com/Chinachu/Mirakurun "GitHub - Chinachu/Mirakurun: A Modern DTV Tuner Server Service.") (2.0.0 beta 0)
 
 
 ## Components
@@ -80,12 +89,6 @@ pm-utils のインストール (必要であれば)。
 # cd chinachu-mirakurun-ss/main/
 ```
 
-設定ファイルを弄る。 (詳細は中身を参照。Chinachu と Mirakurun のホスト名とポート番号は少なくとも編集が必要かと。)
-
-```
-# vi etc/config
-```
-
 インストールを開始する。
 
 ```
@@ -93,10 +96,18 @@ pm-utils のインストール (必要であれば)。
 # ./install.sh
 ```
 
-で、おしまい。
+設定ファイルを弄る。 (詳細は中身を参照。Chinachu と Mirakurun のホスト名とポート番号は少なくとも編集が必要かと。)
 
-設定を変えたいときは、/usr/local/etc/chinachu-mirakurun-ss/config を弄る。それだけで OK。
+```
+# vi /usr/local/etc/chinachu-mirakurun-ss/config
+```
 
+不要になったら、アンインストールスクリプトを叩けばOK。
+
+```
+# chmod +x uninstall.sh
+# ./uninstall.sh
+```
 
 ## License
 This script is released under the MIT license. See the LICENSE file.

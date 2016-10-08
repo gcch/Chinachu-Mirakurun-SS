@@ -38,11 +38,11 @@ echo
 echo "# ------------------------------------------------------- #"
 echo
 
-Config="/usr/local/etc/chinachu-mirakurun-ss/config"
+CompList="/usr/local/etc/chinachu-mirakurun-ss/components"
 
-if [ -f ${Config} ]
+if [ -f ${CompList} ]
 then
-	source ${Config}
+	source ${CompList}
 
 	echo "delete a lib directory:"
 	if [ -d ${LibDir} ]
@@ -56,6 +56,16 @@ then
 	then
 		echo "deleting ${CronScript}"
 		rm -f ${CronScript}
+	fi
+	if [ -h ${PmUtilsScript} ]
+	then
+		echo "deleting ${PmUtilsScript}"
+		rm -f ${PmUtilsScript}"
+	fi
+	if [ -h ${SystemdScript} ]
+	then
+		echo "deleting ${SystemdScript}"
+		rm -f ${SystemdScript}"
 	fi
 
 	echo "deleting symbolic links:"
@@ -71,13 +81,17 @@ then
 		rm -f ${SystemdScript}
 	fi
 
-	echo "deleting a configuration file:"
-	rm -rf ${Config%/*}
+	echo "deleting a configuration directory:"
+	if [ -d ${EtcDir} ]
+	then
+		echo "deleting ${EtcDir}"
+		rm -rf ${EtcDir}
+	fi
 
 	Mesg="operation is finished!"
 	Stat=0
 else
-	Mesg="error: operation is aborted because configuration file is missing."
+	Mesg="error: operation is aborted because components list file is missing."
 	Stat=1
 fi
 
