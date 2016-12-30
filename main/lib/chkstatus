@@ -12,7 +12,8 @@
 # ======================================================= #
 
 # Include Chinachu Sleep Script configuration file
-source /usr/local/etc/chinachu-mirakurun-ss/config
+source /usr/local/etc/chinachu-mirakurun-ss/components
+source ${ConfigFile}
 
 # ======================================================= #
 
@@ -30,7 +31,7 @@ function IsEnableSleep() {
 
 # Chinachu: is Chinachu WUI used
 function IsChinachuWuiUsed() {
-	${ChinachuApiCountConnection} -h ${ChinachuHost} -p ${ChinachuPort}
+	${ChinachuApiCountConnection} -h ${ChinachuHost} -p ${ChinachuPort} >/dev/null 2>&1
 	if (( $? != 0 ))
 	then
 		echo "[`date`] ${0}: Someone is connecting to Chinachu WUI." 1>&2
@@ -42,7 +43,7 @@ function IsChinachuWuiUsed() {
 
 # Chinachu: is Chinachu recording
 function IsChinachuRecording() {
-	${ChinachuApiIsRecording} -h ${ChinachuHost} -p ${ChinachuPort}
+	${ChinachuApiIsRecording} -h ${ChinachuHost} -p ${ChinachuPort} >/dev/null 2>&1
 	if (( $? != 0 ))
 	then
 		echo "[`date`] ${0}: Chinachu is recording now." 1>&2
@@ -71,7 +72,7 @@ function IsChinachuWaitingForNextRec() {
 
 # Mirakurun: stream count
 function IsMirakurunUsed() {
-	${MirakurunApiSumStreamCount} -h ${MirakurunHost} -p ${MirakurunPort}
+	${MirakurunApiSumStreamCount} -h ${MirakurunHost} -p ${MirakurunPort} >/dev/null 2>&1
 	if (( $? != 0 ))
 	then
 	        echo "[`date`] ${0}: Someone is using Mirakurun." 1>&2
@@ -116,7 +117,7 @@ function DoJustWakeup() {
 
 # check whether someone is accessing this server via Samba (root only can execute normally)
 function IsSambaUsed() {
-	if type smbstatus 1> /dev/null 2>&1
+	if type smbstatus >/dev/null 2>&1
 	then
 		declare SmbUsers=`smbstatus -p | grep "^[0-9]" | wc -l`
 		if (( SmbUsers > 0 ))
