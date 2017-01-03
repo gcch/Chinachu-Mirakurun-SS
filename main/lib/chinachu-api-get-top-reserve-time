@@ -51,7 +51,7 @@ if [ -n "${RecTimeMsec}" ]
 then
 	(( RecTime = ${RecTimeMsec} / 1000 ))
 else
-	RecTime=0
+	RecTime=
 fi
 
 echo $RecTime
