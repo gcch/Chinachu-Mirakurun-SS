@@ -46,6 +46,12 @@ ChinachuUrl="http://${ChinachuHost}:${ChinachuPort}"
 ApiPath="/api/reserves.json"
 
 # get the next recording begin time
-(( RecTime = `curl -s ${ChinachuUrl}${ApiPath} | tr ',' '\n' | grep "start" | cut -d ":" -f 2 | sort | head -n 1` / 1000 ))
+RecTimeMsec=`curl -s ${ChinachuUrl}${ApiPath} | tr ',' '\n' | grep "start" | cut -d ":" -f 2 | sort | head -n 1`
+if [ -n "${RecTimeMsec}" ]
+then
+	(( RecTime = ${RecTimeMsec} / 1000 ))
+else
+	RecTime=0
+fi
 
 echo $RecTime
