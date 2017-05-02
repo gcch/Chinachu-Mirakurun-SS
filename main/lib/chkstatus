@@ -172,7 +172,7 @@ IsChinachuWuiUsed
 IsChinachuRecording
 IsChinachuWaitingForNextRec
 
-IsMirakurunUsed
+#IsMirakurunUsed
 
 DoJustBoot
 DoJustWakeup
