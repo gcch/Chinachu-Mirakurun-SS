@@ -6,7 +6,7 @@ Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
 「[Chinachu Sleep Scripts (β)](https://github.com/gcch/Chinachu-Sleep-Scripts "GitHub - gcch/Chinachu-Sleep-Scripts")」の改良 (劣化？) 版。
 
-ちゃんと動かない可能性あり。
+動作保証なし。ご利用は自己責任で。
 
 
 ## Description
@@ -26,17 +26,14 @@ API を叩くスクリプトをすべてシェルスクリプトで書き直し�
 
 ```
 $ cat /etc/centos-release
-CentOS Linux release 7.2.1511 (Core)
+CentOS Linux release 7.3.1611 (Core)
 ```
 
 CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その派生の Ubuntu とかでも動かせないことはないはず。
 
 ### Software
 
-- Mirakurun with Rivarun on Chinachu Beta
- - [Chinachu Beta](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.")
- - [Rivarun](https://github.com/Chinachu/Rivarun "GitHub - Chinachu/Rivarun: A Simple Mirakurun Client Implementation like recpt1.") (v1.2.0)
- - [Mirakurun](https://github.com/Chinachu/Mirakurun "GitHub - Chinachu/Mirakurun: A Modern DTV Tuner Server Service.") (v2.0.0 beta 0)
+- [Chinachu γ](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.")
 
 
 ## Components
