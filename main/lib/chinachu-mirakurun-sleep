@@ -5,14 +5,15 @@
 # chinachu-mirakurun-sleep
 # (Component of Chinachu with Mirakurun Sleep Script)
 #
-# Copyright (c) 2016 tag
+# Copyright (c) 2016-2017 tag
 #
 # ------------------------------------------------------- #
 
 # ======================================================= #
 
-# Include Chinachu Sleep Script configuration file
+# Include Chinachu Sleep Script configuration files
 source /usr/local/etc/chinachu-mirakurun-ss/config
+source /usr/local/etc/chinachu-mirakurun-ss/conponents
 
 # environment
 PATH=${PATH}:/usr/bin:/usr/sbin
@@ -156,6 +157,8 @@ function PrepareToSleep() {
 	# unload an kernel module (pt3_drv)
 	if lsmod | grep pt3_drv > /dev/null 2>&1
 	then
+		mirakurun stop
+		sleep 5s
 		modprobe -r pt3_drv
 	fi
 
@@ -168,8 +171,9 @@ function InitializeAfterWakeup() {
 	echo 0 > ${WakeAlarm}
 	touch ${TmpFile}
 
-	# load an kernel module (pt3_drv)
+	# load an kernel module (pt3_drv) & start mirakurun-server
 	modprobe pt3_drv
+	mirakurun start
 
 	echo "[`date`] ${0}: This system is waking up from hibernate or suspend now."
 }
