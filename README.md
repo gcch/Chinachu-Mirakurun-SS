@@ -1,4 +1,4 @@
-# Chinachu with Mirakurun Sleep Scripts (γ)
+# Chinachu γ Sleep Scripts
 
 ## Overview
 
