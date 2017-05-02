@@ -62,6 +62,7 @@ Chinachu with Mirakurun Sleep Script を構成ファイルたち。[] は、フ�
   - recpt1test.sh (おまけ1。recpt1 録画テストスクリプト。)
   - rivaruntest.sh (おまけ2。rivarun 録画テストスクリプト。)
   - update-mirakurun.sh (おまけ3。Mirakurun & Rivarun 更新スクリプト。)
+  - recordedCommand.sh (おまけ4。録画完了時のメール送信スクリプト。)
 - README.md (このファイル。)
 - LICENSE.md (ライセンスファイル。)
 
