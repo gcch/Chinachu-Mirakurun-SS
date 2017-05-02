@@ -33,7 +33,7 @@ CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その
 
 ### Software
 
-- [Chinachu γ](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.")
+- [Chinachu γ](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.") (including Mirakurun)
 
 
 ## Components
