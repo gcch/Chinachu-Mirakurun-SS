@@ -181,4 +181,5 @@ IsSambaUsed
 IsServerLoggedIn
 
 # normal end
+echo "[`date`] ${0}: It is in a state that can be shutdown/hibernate/sleep this system." 1>&2
 exit 0
