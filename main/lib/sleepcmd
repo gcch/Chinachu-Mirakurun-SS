@@ -5,7 +5,7 @@
 # sleepcmd
 # (Component of Chinachu with Mirakurun Sleep Script)
 #
-# Copyright (c) 2016 tag
+# Copyright (c) 2016-2017 tag
 #
 # ------------------------------------------------------- #
 
@@ -23,30 +23,34 @@ case ${PowerManager} in
 pm-utils)
         case ${PowerState} in
         hibernate)
+                echo "[`date`] ${0}: System will go to hibernate soon."
                 /usr/sbin/pm-hibernate
                 ;;
         shutdown)
+                echo "[`date`] ${0}: System will be shutdown soon."
                 /usr/sbin/shutdown -h now
                 ;;
         *)
-                echo "error: please check \`PowerState' in config"
+                echo "[`date`] ${0}: error: please check \`PowerState' in config"
                 ;;
         esac
         ;;
 systemd)
         case ${PowerState} in
         hibernate)
+                echo "[`date`] ${0}: System will go to hibernate soon."
                 /usr/bin/systemctl hibernate
                 ;;
         shutdown)
+                echo "[`date`] ${0}: System will be shutdown soon."
                 /usr/bin/systemctl shutdown
                 ;;
         *)
-                echo "error: please check \`PowerState' in config"
+                echo "[`date`] ${0}: error: please check \`PowerState' in config"
                 ;;
         esac
         ;;
 *)
-        echo "error: please check \`PowerManager' in config"
+	echo "[`date`] ${0}: error: please check \`PowerManager' in config"
         ;;
 esac
