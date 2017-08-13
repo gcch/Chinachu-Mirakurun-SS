@@ -110,7 +110,7 @@ function SetupCron() {
 	cp ./cron/chinachu-mirakurun-ss-cron ${CronScript}
 
 	# write a cron schedule
-	declare CronEntry="*/${CheckPeriod} * * * * root ${ChinachuCheckStatus} && sleep 10 && ${ShiftToSleep}"
+	declare CronEntry="*/${CheckPeriod} * * * * root /usr/bin/tail -n 1000 $LOGFILE >$LOGFILE ; ${ChinachuCheckStatus} >>$LOGFILE 2>&1 && sleep 10 && ${ShiftToSleep} >>$LOGFILE 2>&1"
 	echo "writing a cron job..."
 	echo "${CronEntry}" >> "${CronScript}"
 
