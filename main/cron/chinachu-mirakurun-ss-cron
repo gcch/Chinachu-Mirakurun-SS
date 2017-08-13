@@ -12,4 +12,4 @@ MAILTO=
 HOME=/
 LOGFILE="/var/log/chinachu-ss.log"
 LOGFILE_OLD="/var/log/chinachu-ss-old.log"
-0 0 * * * root [[ `wc -l ${LOGFILE} | cut -d ' ' -f1` -gt 1000 ]] && cat ${LOGFILE} > ${LOGFILE_OLD}
+0 0 * * * root [[ `wc -l ${LOGFILE} | cut -d ' ' -f1` -ge 1000 ]] && cat ${LOGFILE} > ${LOGFILE_OLD}
