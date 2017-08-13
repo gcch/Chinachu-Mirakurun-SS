@@ -11,3 +11,5 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=
 HOME=/
 LOGFILE="/var/log/chinachu-ss.log"
+LOGFILE_OLD="/var/log/chinachu-ss-old.log"
+0 0 * * * root [[ `wc -l ${LOGFILE} | cut -d ' ' -f1` -gt 1000 ]] && cat ${LOGFILE} > ${LOGFILE_OLD}
