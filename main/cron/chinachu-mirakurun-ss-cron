@@ -10,3 +10,4 @@ SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=
 HOME=/
+LOGFILE="/var/log/chinachu-ss.log"
