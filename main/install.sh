@@ -78,6 +78,18 @@ function CopyLibs() {
 function LinkPowerManagerScript() {
 	echo "setup power manager:"
 
+	if [ -e ${PmUtilsScript} ]
+	then
+		echo "deleting a script for pm-utils..."
+		rm -f "${PmUtilsScript}"
+	fi
+	
+	if [ -e ${SystemdScript} ]
+	then
+		echo "deleting a script for systemd..."
+		rm -f ${SystemdScript}
+	fi
+
 	if [ -d ${PmUtilsScript%/*} ]
 	then
 		echo "linking to script for pm-utils..."
