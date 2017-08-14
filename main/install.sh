@@ -81,13 +81,13 @@ function LinkPowerManagerScript() {
 	if [ -d ${PmUtilsScript%/*} ]
 	then
 		echo "linking to script for pm-utils..."
-		ln -fs ${LibDir}/chinachu-mirakurun-sleep ${PmUtilsScript}
+		echo -e "#/bin/bash\n${LibDir}/chinachu-mirakurun-sleep >>${LogFile}" >${PmUtilsScript}
 	fi
 
 	if [ -d ${SystemdScript%/*} ]
 	then
 		echo "linking to script for systemd..."
-		ln -fs ${LibDir}/chinachu-mirakurun-sleep ${SystemdScript}
+		echo -e "#/bin/bash\n${LibDir}/chinachu-mirakurun-sleep >>${LogFile}" >${SystemdScript}
 	fi
 
 	echo
@@ -110,9 +110,12 @@ function SetupCron() {
 	cp ./cron/chinachu-mirakurun-ss-cron ${CronScript}
 
 	# write a cron schedule
-	declare CronEntry="*/${CheckPeriod} * * * * root ${ChinachuCheckStatus} >>$LOGFILE 2>&1 && sleep 10 && ${ShiftToSleep} >>$LOGFILE 2>&1"
+	declare CronLogRotateEntry="0 0 * * * root [[ `wc -l ${LogFile} | cut -d ' ' -f1` -ge 1000 ]] && cat ${LogFile} >${LogFileOld} && echo -n >${LogFile}"
 	echo "writing a cron job..."
-	echo "${CronEntry}" >> "${CronScript}"
+	echo "${CronLogRotateEntry}" >>"${CronScript}"
+	declare CronEntry="*/${CheckPeriod} * * * * root ${ChinachuCheckStatus} >>${LogFile} 2>&1 && sleep 10 && ${ShiftToSleep} >>${LogFile} 2>&1"
+	echo "writing a cron job..."
+	echo "${CronEntry}" >>"${CronScript}"
 
 	echo
 }
