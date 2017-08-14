@@ -110,7 +110,7 @@ function SetupCron() {
 	cp ./cron/chinachu-mirakurun-ss-cron ${CronScript}
 
 	# write a cron schedule
-	declare CronLogRotateEntry="0 0 * * * root [[ `wc -l ${LogFile} | cut -d ' ' -f1` -ge 1000 ]] && cat ${LogFile} >${LogFileOld} && echo -n >${LogFile}"
+	declare CronLogRotateEntry="0 0 * * * root [[ \`wc -l ${LogFile} | cut -d ' ' -f1\` -ge 1000 ]] && cat ${LogFile} >${LogFileOld} && echo -n >${LogFile}"
 	echo "writing a cron job..."
 	echo "${CronLogRotateEntry}" >>"${CronScript}"
 	declare CronEntry="*/${CheckPeriod} * * * * root ${ChinachuCheckStatus} >>${LogFile} 2>&1 && sleep 10 && ${ShiftToSleep} >>${LogFile} 2>&1"
