@@ -34,5 +34,7 @@ PmUtilsScript="/etc/pm/sleep.d/81${ProjectName}"
 SystemdScript="/usr/lib/systemd/system-sleep/${ProjectName}"
 
 TmpFile="/var/tmp/.${ProjectName}"
+LogFile="/var/log/${ProjectName}.log"
+LogFileOld="/var/log/${ProjectName}-old.log"
 
 # ------------------------------------------------------- #
