@@ -13,7 +13,7 @@
 
 # Include Chinachu Sleep Script configuration files
 source /usr/local/etc/chinachu-mirakurun-ss/config
-source /usr/local/etc/chinachu-mirakurun-ss/conponents
+source /usr/local/etc/chinachu-mirakurun-ss/components
 
 # environment
 PATH=${PATH}:/usr/bin:/usr/sbin
