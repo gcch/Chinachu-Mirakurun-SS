@@ -26,12 +26,13 @@ API を叩くスクリプトをすべてシェルスクリプトで書き直し�
 
 ```
 $ cat /etc/centos-release
-CentOS Linux release 7.3.1611 (Core)
+CentOS Linux release 7.4.1708 (Core)
 ```
 
 CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その派生の Ubuntu とかでも動かせないことはないはず。
 
 ### Software
+基本的に最新版がテスト環境。 (最終検証タイミングでは 2017/12/29 にアップデート実施)
 
 - [Chinachu γ](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.") (including [Mirakurun](https://github.com/Chinachu/Mirakurun "GitHub - Chinachu/Mirakurun: A Modern DTV Tuner Server Service."))
 
