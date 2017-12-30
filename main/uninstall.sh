@@ -4,7 +4,7 @@
 #
 # Chinachu with Mirakurun Sleep Scripts - Uninstaller
 #
-# Copyright (c) 2016 tag
+# Copyright (c) 2016-2017 tag
 #
 # ------------------------------------------------------- #
 
@@ -26,7 +26,7 @@ echo "# ------------------------------------------------------- #"
 echo "#                                                         #"
 echo "#   Chinachu with Mirakurun Sleep Scripts - Uninstaller   #"
 echo "#                                                         #"
-echo "#                                Copyright (c) 2016 tag   #"
+echo "#                           Copyright (c) 2016-2017 tag   #"
 echo "#                                                         #"
 echo "# ------------------------------------------------------- #"
 echo
@@ -40,52 +40,72 @@ echo
 
 CompList="/usr/local/etc/chinachu-mirakurun-ss/components"
 
-if [ -f ${CompList} ]
+if [ -f "${CompList}" ]
 then
-	source ${CompList}
+	source "${CompList}"
 
 	echo "delete a lib directory:"
-	if [ -d ${LibDir} ]
+	if [ -d "${LibDir}" ]
 	then
 		echo "deleting ${LibDir}"
 		rm -rf "${LibDir}"
 	fi
 
 	echo "delete a cron file:"
-	if [ -f ${CronScript} ]
+	if [ -f "${CronScript}" ]
 	then
 		echo "deleting ${CronScript}"
 		rm -f "${CronScript}"
 	fi
-	if [ -f ${PmUtilsScript} ]
+	
+	echo "detete scripts for power management utilities:"
+	if [ -f "${PmUtilsScript}" ]
 	then
 		echo "deleting ${PmUtilsScript}"
 		rm -f "${PmUtilsScript}"
 	fi
-	if [ -f ${SystemdScript} ]
+	if [ -f "${SystemdScript}" ]
 	then
 		echo "deleting ${SystemdScript}"
 		rm -f "${SystemdScript}"
 	fi
 
-	echo "deleting symbolic links:"
-	if [ -h ${PmUtilsScript} ]
+	echo "deleting symbolic links for power management utilities (previous version support):"
+	if [ -h "${PmUtilsScript}" ]
 	then
 		echo "deleting ${PmUtilsScript}"
 		rm -f "${PmUtilsScript}"
 	fi
-
-	if [ -h ${SystemdScript} ]
+	if [ -h "${SystemdScript}" ]
 	then
 		echo "deleting ${SystemdScript}"
 		rm -f "${SystemdScript}"
 	fi
 
 	echo "deleting a configuration directory:"
-	if [ -d ${EtcDir} ]
+	if [ -d "${EtcDir}" ]
 	then
 		echo "deleting ${EtcDir}"
 		rm -rf "${EtcDir}"
+	fi
+
+	echo "deleting a temporary file:"
+	if [ -f "${TmpFile}" ]
+	then
+		echo "deleting ${TmpFile}"
+		rm -rf "${TmpFile}"
+	fi
+
+	echo "deleting a log file:"
+	if [ -f "${LogFile}" ]
+	then
+		echo "deleting ${LogFile}"
+		rm -rf "${LogFile}"
+	fi
+	if [ -f "${LogFileOld}" ]
+	then
+		echo "deleting ${LogFileOld}"
+		rm -rf "${LogFileOld}"
 	fi
 
 	Mesg="operation is finished!"
