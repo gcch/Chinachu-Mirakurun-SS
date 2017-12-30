@@ -126,7 +126,7 @@ function SetupCron() {
 	declare CronLogRotateEntry="0 0 * * * root [[ \`wc -l ${LogFile} | cut -d ' ' -f1\` -ge 1000 ]] && cat ${LogFile} >${LogFileOld} && echo -n >${LogFile}"
 	echo "writing a cron job..."
 	echo "${CronLogRotateEntry}" >>"${CronScript}"
-	declare CronEntry="*/${CheckPeriod} * * * * root ${ChinachuCheckStatus} >>${LogFile} 2>&1 && sleep 10 && ${ShiftToSleep} >>${LogFile} 2>&1"
+	declare CronEntry="2-59/${CheckPeriod} * * * * root ${ChinachuCheckStatus} >>${LogFile} 2>&1 && sleep 10 && ${ShiftToSleep} >>${LogFile} 2>&1"
 	echo "writing a cron job..."
 	echo "${CronEntry}" >>"${CronScript}"
 
