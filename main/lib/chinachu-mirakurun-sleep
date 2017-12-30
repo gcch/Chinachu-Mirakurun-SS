@@ -158,7 +158,7 @@ function PrepareToSleep() {
 	if lsmod | grep pt3_drv > /dev/null 2>&1
 	then
 		mirakurun stop
-		sleep 5s
+		StopRecpt1
 		modprobe -r pt3_drv
 	fi
 
@@ -171,11 +171,24 @@ function InitializeAfterWakeup() {
 	echo 0 > ${WakeAlarm}
 	touch ${TmpFile}
 
+	echo "[`date`] ${0}: This system is waking up from hibernate or suspend now."
+	
 	# load an kernel module (pt3_drv) & start mirakurun-server
+	mirakurun stop
+	StopRecpt1
+	modprobe -r pt3_drv
 	modprobe pt3_drv
 	mirakurun start
+}
 
-	echo "[`date`] ${0}: This system is waking up from hibernate or suspend now."
+# ------------------------------------------------------- #
+
+function StopRecpt1() {
+	sleep 2s	
+	for pid in $(ps aux | grep -v grep | grep recpt1 | awk '{print $2}'); do
+			kill -9 $pid
+	done
+	sleep 2s
 }
 
 # ======================================================= #
