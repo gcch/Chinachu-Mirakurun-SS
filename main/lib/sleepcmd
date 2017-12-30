@@ -16,8 +16,8 @@ source /usr/local/etc/chinachu-mirakurun-ss/config
 
 # ======================================================= #
 
-echo "PowerManager: ${PowerManager}"
-echo "PowerState: ${PowerState}"
+#echo "PowerManager: ${PowerManager}"
+#echo "PowerState: ${PowerState}"
 
 case ${PowerManager} in
 pm-utils)
