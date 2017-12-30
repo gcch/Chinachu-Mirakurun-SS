@@ -4,7 +4,7 @@
 #
 # Chinachu with Mirakurun Sleep Scripts - Installer
 #
-# Copyright (c) 2016 tag
+# Copyright (c) 2016-2017 tag
 #
 # ------------------------------------------------------- #
 
