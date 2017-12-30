@@ -117,6 +117,13 @@ pm-utils のインストール。systemd (RHEL / CentOS 7 以降) 環境であ�
 # ./uninstall.sh
 ```
 
+### Log
+ログはすべて書きファイルに書き出される。 (/etc/cron.d/chinachu-mirakurun-ss にてローテーションも実施。)
+
+```
+/var/log/chinachu-mirakurun-ss.log
+```
+
 ## License
 This script is released under the MIT license. See the LICENSE file.
 
