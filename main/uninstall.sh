@@ -48,44 +48,44 @@ then
 	if [ -d ${LibDir} ]
 	then
 		echo "deleting ${LibDir}"
-		rm -rf ${LibDir}
+		rm -rf "${LibDir}"
 	fi
 
 	echo "delete a cron file:"
 	if [ -f ${CronScript} ]
 	then
 		echo "deleting ${CronScript}"
-		rm -f ${CronScript}
+		rm -f "${CronScript}"
 	fi
-	if [ -h ${PmUtilsScript} ]
-	then
-		echo "deleting ${PmUtilsScript}"
-		rm -f ${PmUtilsScript}"
-	fi
-	if [ -h ${SystemdScript} ]
-	then
-		echo "deleting ${SystemdScript}"
-		rm -f ${SystemdScript}"
-	fi
-
-	echo "deleting symbolic links:"
 	if [ -f ${PmUtilsScript} ]
 	then
 		echo "deleting ${PmUtilsScript}"
-		rm -f ${PmUtilsScript}
+		rm -f "${PmUtilsScript}"
 	fi
-
 	if [ -f ${SystemdScript} ]
 	then
 		echo "deleting ${SystemdScript}"
-		rm -f ${SystemdScript}
+		rm -f "${SystemdScript}"
+	fi
+
+	echo "deleting symbolic links:"
+	if [ -h ${PmUtilsScript} ]
+	then
+		echo "deleting ${PmUtilsScript}"
+		rm -f "${PmUtilsScript}"
+	fi
+
+	if [ -h ${SystemdScript} ]
+	then
+		echo "deleting ${SystemdScript}"
+		rm -f "${SystemdScript}"
 	fi
 
 	echo "deleting a configuration directory:"
 	if [ -d ${EtcDir} ]
 	then
 		echo "deleting ${EtcDir}"
-		rm -rf ${EtcDir}
+		rm -rf "${EtcDir}"
 	fi
 
 	Mesg="operation is finished!"
