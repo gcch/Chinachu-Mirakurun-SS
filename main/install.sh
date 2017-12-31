@@ -192,6 +192,9 @@ echo
 CheckRunAsRoot
 CreateAndImportConfig
 
+# grant permission
+chmod +x ./uninstall.sh
+
 echo
 echo "# ------------------------------------------------------- #"
 echo
