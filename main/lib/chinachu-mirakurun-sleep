@@ -193,6 +193,13 @@ function StopRecpt1() {
 
 # ======================================================= #
 
+if [ $# -le 0 ]
+then
+	echo "[`date`] ${0}: there is no argument." 1>&2
+	exit 1
+fi
+echo "[`date`] ${0}: arguments: ${@}"
+
 # main for pm-utils
 case ${1} in
 	hibernate|suspend)
