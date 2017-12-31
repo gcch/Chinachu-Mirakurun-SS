@@ -94,6 +94,7 @@ function LinkPowerManagerScript() {
 	then
 		echo "linking to script for pm-utils..."
 		echo -e "#!/bin/bash\n${LibDir}/chinachu-mirakurun-sleep \${1} >>${LogFile}" >"${PmUtilsScript}"
+		chmod +x "${PmUtilsScript%}"
 	fi
 
 	if [ -d ${SystemdScript%/*} ]
