@@ -115,7 +115,6 @@ pm-utils のインストール。systemd (RHEL / CentOS 7 以降) 環境であ�
 不要になったら、アンインストールスクリプトを叩けばOK。
 
 ```
-# chmod +x uninstall.sh
 # ./uninstall.sh
 ```
 
