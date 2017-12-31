@@ -11,7 +11,7 @@ Chinachu with Mirakurun なサーバ向け自動休止スクリプト群。
 
 ## Description
 
-「[Chinachu Sleep Scripts (β)](https://github.com/gcch/Chinachu-Sleep-Scripts "GitHub - gcch/Chinachu-Sleep-Scripts")」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直し~~、Mirakurun チェック部分を加え~~た。
+「[Chinachu Sleep Scripts (β)](https://github.com/gcch/Chinachu-Sleep-Scripts "GitHub - gcch/Chinachu-Sleep-Scripts")」と基本動作は同じ。全体的に荒削りだったスクリプトを書き直した。
 
 API を叩くスクリプトをすべてシェルスクリプトで書き直したため、Python 3 は不要となった。 (※ curl で API 経由の情報取得を行っている。)
 
