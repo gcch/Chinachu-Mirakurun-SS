@@ -93,14 +93,14 @@ function LinkPowerManagerScript() {
 	if [ -d ${PmUtilsScript%/*} ]
 	then
 		echo "linking to script for pm-utils..."
-		echo -e "#!/bin/bash\n${LibDir}/chinachu-mirakurun-sleep \${1} >>${LogFile}" >"${PmUtilsScript}"
+		echo -e "#!/bin/bash\n${LibDir}/chinachu-mirakurun-sleep \${1} >>${LogFile} 2>&1" >"${PmUtilsScript}"
 		chmod +x "${PmUtilsScript%}"
 	fi
 
 	if [ -d ${SystemdScript%/*} ]
 	then
 		echo "linking to script for systemd..."
-		echo -e "#!/bin/bash\n${LibDir}/chinachu-mirakurun-sleep \${1} \${2} >>${LogFile}" >"${SystemdScript}"
+		echo -e "#!/bin/bash\n${LibDir}/chinachu-mirakurun-sleep \${1} \${2} >>${LogFile} 2>&1" >"${SystemdScript}"
 		chmod +x "${SystemdScript}"
 	fi
 
