@@ -154,14 +154,6 @@ function PrepareToSleep() {
 		echo "[`date`] ${0}: failure to schedule" 1>&2
 	fi
 
-	# unload an kernel module (pt3_drv)
-	if lsmod | grep pt3_drv > /dev/null 2>&1
-	then
-		mirakurun stop
-		StopRecpt1
-		modprobe -r pt3_drv
-	fi
-
 	echo "[`date`] ${0}: This system will be stopped soon."
 }
 
@@ -173,23 +165,11 @@ function InitializeAfterWakeup() {
 
 	echo "[`date`] ${0}: This system is waking up from hibernate or suspend now."
 	
-	# load an kernel module (pt3_drv) & start mirakurun-server
-	mirakurun stop
-	StopRecpt1
-	modprobe -r pt3_drv
-	modprobe pt3_drv
-	mirakurun start
+	# reboot
+	reboot
 }
 
 # ------------------------------------------------------- #
-
-function StopRecpt1() {
-	sleep 2s	
-	for pid in $(ps aux | grep -v grep | grep recpt1 | awk '{print $2}'); do
-			kill -9 $pid
-	done
-	sleep 2s
-}
 
 # ======================================================= #
 
