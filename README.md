@@ -29,10 +29,16 @@ $ cat /etc/centos-release
 CentOS Linux release 7.4.1708 (Core)
 ```
 
+カーネルは ELRepo にて 4.x 系に変更済み。 (以前はデフォルトの 3.x で使用できていたので、3.x でも問題はないはず。)
+```
+$ uname -r
+4.16.6-1.el7.elrepo.x86_64
+```
+
 CentOS 7 がテスト環境であるが、公式推奨の Debian とか、その派生の Ubuntu とかでも動かせないことはないはず。
 
 ### Software
-基本的に最新版がテスト環境。 (最終検証タイミングでは 2017/12/29 にアップデート実施)
+基本的に最新版がテスト環境。 (最終検証タイミングでは 2018/05/01 にアップデート実施)
 
 - [Chinachu γ](https://github.com/Chinachu/Chinachu "GitHub - Chinachu/Chinachu: Most Lovely DVR Software in Japan.") (including [Mirakurun](https://github.com/Chinachu/Mirakurun "GitHub - Chinachu/Mirakurun: A Modern DTV Tuner Server Service."))
 
