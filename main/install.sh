@@ -160,8 +160,14 @@ function RestartCron() {
 		;;
 	systemd)
 		# for systemd
-		# for RHEL / CentOS 7.x
-		systemctl restart crond.service
+		# for RHEL / CentOS
+		if [ -f /etc/systemd/system/*/crond.service ]
+		then
+			systemctl restart crond.service
+		# for Debian
+		elif [ -f /etc/systemd/system/*/cron.service ]
+			systemctl restart cron.service
+		fi
 		;;
 	esac
 
