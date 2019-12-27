@@ -4,7 +4,7 @@
 #
 # Chinachu with Mirakurun Sleep Scripts - Installer
 #
-# Copyright (c) 2016-2017 tag
+# Copyright (c) 2016-2019 tag
 #
 # ------------------------------------------------------- #
 
@@ -189,7 +189,7 @@ echo "# ------------------------------------------------------- #"
 echo "#                                                         #"
 echo "#    Chinachu with Mirakurun Sleep Scripts - Installer    #"
 echo "#                                                         #"
-echo "#                          Copyright (c) 2016-2017 tag    #"
+echo "#                          Copyright (c) 2016-2019 tag    #"
 echo "#                                                         #"
 echo "# ------------------------------------------------------- #"
 echo
