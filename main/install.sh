@@ -166,6 +166,7 @@ function RestartCron() {
 			systemctl restart crond.service
 		# for Debian
 		elif [ -f /etc/systemd/system/*/cron.service ]
+		then
 			systemctl restart cron.service
 		fi
 		;;
